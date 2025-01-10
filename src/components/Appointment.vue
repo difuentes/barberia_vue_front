@@ -31,13 +31,14 @@
 
         <div class="flex gap-2 items-center">
             <RouterLink
-              
+                :to="{name: 'edit-appointment', params: { id : appointment._id} }"
                 class="bg-emerald-500 rounded-lg p-3 text-white text-sm uppercase font-black flex-1 md:flex-none"
             >
                 Editar Cita
             </RouterLink>
 
             <button
+               @click="appointments.cancelAppointment(appointment._id)" 
                 class="bg-red-700 rounded-lg p-3 text-white text-sm uppercase font-black flex-1 md:flex-none"
                
             >

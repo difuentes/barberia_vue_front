@@ -38,6 +38,22 @@ const router = createRouter({
             },
           ]
         },
+        {
+          path: ':id/editar',
+          component: () => import('../views/appointments/EditAppointmentLayout.vue'),
+          children: [
+            {
+                path: '',
+                name: 'edit-appointment',
+                component: () => import('../views/appointments/ServicesView.vue'),
+            },
+            {
+                path: 'detalles',
+                name: 'edit-appointment-details',
+                component: () => import('../views/appointments/AppointmentView.vue'),
+            },
+          ]
+        }
       ],
     }, {
       path: '/auth',
@@ -77,13 +93,12 @@ const router = createRouter({
 
 router.beforeEach( async (to, from, next) => {
   const requiresAuth = to.matched.some(url => url.meta.requiresAuth)
-
+ 
   if(requiresAuth) {
    
     try {
       const { data } =  await AuthAPI.auth()
       next()
-      
     } catch (error) {
       next({name: 'login'})
     }
